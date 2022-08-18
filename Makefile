@@ -6,7 +6,7 @@ grafana:
 	docker run -d \
 	--name grafana \
 	-p 3003:3000 \
-	-v /data/lib/docker-influxdb-grafana/grafana:/var/lib/grafana \
+	-v /data/lib/grafana-influxdb-docker/grafana:/var/lib/grafana \
 	${DOCKER_IMAGE_GRAFANA_NAME}
 
 
@@ -15,10 +15,10 @@ influxdb:
 	--name ${DOCKER_CONTAINER_INFLUXDB_NAME} \
 	-p 8086:8086 \
 	-p 25826:25826/udp \
-	-v /data/lib/docker-influxdb-grafana/influxdb:/var/lib/influxdb \
+	-v /data/lib/grafana-influxdb-docker/influxdb:/var/lib/influxdb \
 	-v $(shell pwd)/influxdb.d/types.db:/usr/share/collectd/types.db:ro \
 	-e DOCKER_INFLUXDB_INIT_USERNAME=root \
-	-e DOCKER_INFLUXDB_INIT_PASSWORD='CookApps#tjdska' \
+	-e DOCKER_INFLUXDB_INIT_PASSWORD='password' \
 	-e DOCKER_INFLUXDB_INIT_ORG=cookapps \
 	-e DOCKER_INFLUXDB_INIT_BUCKET=cookapps \
 	-e INFLUXDB_COLLECTD_ENABLED=true \
